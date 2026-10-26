@@ -1,0 +1,79 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Личный кабинет — FridgeChef</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body class="light">
+
+    <!-- Всплывающий индикатор сохранения темы -->
+    <div id="theme-save-indicator">Тема сохранена!</div>
+
+    <!-- Верхняя навигационная панель в стиле главного экрана -->
+    <header class="main-header">
+        <div class="header-container">
+            <div class="logo">
+                <span class="logo-icon">🥑</span> 
+                <strong>FridgeChef</strong>
+            </div>
+            <div class="theme-switch">
+                <button type="button" data-theme="light" class="active">Светлая</button>
+                <button type="button" data-theme="dark">Тёмная</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="container dashboard-container">
+        <!-- Блок приветствия -->
+        <section class="welcome-card">
+            <h1>{greeting}</h1>
+            <p class="subtitle">Добро пожаловать в ваш кулинарный хаб управления рецептами</p>
+        </section>
+
+        <!-- Сетка с инструментами управления -->
+        <div class="dashboard-grid">
+            
+            <!-- Карточка Экспорта -->
+            <div class="feature-card export-card">
+                <div class="card-icon">📤</div>
+                <h3>Экспорт рецептов</h3>
+                <p>Выгрузите полную базу рецептов и ингредиентов вашего сервиса в один клик. Файл сохранится в структурированном формате JSON.</p>
+                <a href="/api/export_recipes" class="btn btn-secondary">
+                    Скачать JSON
+                </a>
+            </div>
+
+            <!-- Карточка Импорта -->
+            <div class="feature-card import-card">
+                <div class="card-icon">📥</div>
+                <h3>Импорт рецептов</h3>
+                <p>Добавляйте новые кулинарные шедевры пакетом. Загрузите валидный JSON-файл для мгновенного обновления базы данных.</p>
+                
+                <form id="importForm" class="import-form">
+                    <label class="file-upload-label">
+                        <input type="file" id="jsonFileInput" accept=".json" required>
+                        <span class="file-custom-btn">Выбрать файл</span>
+                    </label>
+                    <button type="submit" class="btn btn-primary">
+                        Импортировать
+                    </button>
+                </form>
+                
+                <!-- Место вывода статуса (управляется profile.js) -->
+                <p id="importResult" class="status-message"></p>
+            </div>
+
+        </div>
+
+        <!-- Нижняя панель действий -->
+        <footer class="dashboard-footer">
+            <a href="/" class="btn-link">← На главную кухню</a>
+            <a href="/logout" class="logout-link">Выйти из аккаунта</a>
+        </footer>
+    </main>
+
+    <script src="/static/profile.js"></script>
+</body>
+</html>

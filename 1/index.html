@@ -1,0 +1,85 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FridgeChef — Осознанное приготовление еды</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body class="light">
+
+    <div class="container main-auth-container">
+        <div class="logo-area">
+            <span class="main-logo-icon">🥑</span>
+            <h1>FridgeChef</h1>
+            <p class="tagline">Спасаем продукты со вкусом</p>
+        </div>
+
+        <!-- ФОРМА ВХОДА (Отображается по умолчанию) -->
+        <div id="loginSection" class="auth-box">
+            <h2>Войти в аккаунт</h2>
+            <form id="loginForm">
+                <input type="text" id="username" placeholder="Ваше имя (логин)" required autocomplete="username">
+                <button type="submit" class="btn btn-primary">Войти</button>
+            </form>
+            <p class="auth-switch-text">Впервые на кухне? <a href="#" id="toRegister">Создать аккаунт</a></p>
+        </div>
+
+        <!-- ФОРМА РЕГИСТРАЦИИ (Скрыта по умолчанию) -->
+        <div id="registerSection" class="auth-box hidden">
+            <h2>Регистрация</h2>
+            <form id="registerForm">
+                <input type="text" id="regUsername" placeholder="Ваше имя" required autocomplete="username">
+                <input type="email" id="regEmail" placeholder="Электронная почта" required autocomplete="email">
+                <input type="password" id="regPassword" placeholder="Пароль" required autocomplete="new-password">
+                <button type="submit" class="btn btn-success">Зарегистрироваться</button>
+            </form>
+            <p class="auth-switch-text">Уже есть аккаунт? <a href="#" id="toLogin">Войти</a></p>
+        </div>
+    </div>
+
+    <!-- Интерактивный скрипт для переключения форм и обработки входа -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const loginSection = document.getElementById('loginSection');
+            const registerSection = document.getElementById('registerSection');
+            const toRegister = document.getElementById('toRegister');
+            const toLogin = document.getElementById('toLogin');
+
+            // Переключение интерфейсов
+            toRegister.addEventListener('click', (e) => {
+                e.preventDefault();
+                loginSection.classList.add('hidden');
+                registerSection.classList.remove('hidden');
+            });
+
+            toLogin.addEventListener('click', (e) => {
+                e.preventDefault();
+                registerSection.classList.add('hidden');
+                loginSection.classList.remove('hidden');
+            });
+
+            // Логика отправки формы входа (совместима с вашим app.js)
+            const loginForm = document.getElementById('loginForm');
+            loginForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const nameInput = document.getElementById('username');
+                const username = nameInput.value.trim();
+                if (!username) return;
+
+                // Перенаправление на ваш серверный профиль
+                window.location.href = '/profile?user=' + encodeURIComponent(username);
+            });
+
+            // Заглушка для демонстрации регистрации (для полноценной работы нужен POST-обработчик на сервере)
+            const registerForm = document.getElementById('registerForm');
+            registerForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const regUser = document.getElementById('regUsername').value.trim();
+                alert('Регистрация успешна! Перенаправляем в личный кабинет...');
+                window.location.href = '/profile?user=' + encodeURIComponent(regUser);
+            });
+        });
+    </script>
+</body>
+</html>

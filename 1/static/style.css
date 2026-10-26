@@ -1,0 +1,377 @@
+﻿root {
+    --transition-speed: 0.4s; /* Увеличено для более плавного эффекта */
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    margin: 0;
+    padding: 0;
+    /* Плавная анимация для всей страницы */
+    transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
+}
+
+.container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    text-align: center;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    /* Фон контейнера тоже анимируем */
+    transition: background-color var(--transition-speed) ease;
+}
+
+/* --- СВЕТЛАЯ ТЕМА --- */
+.light {
+    background-color: #f0f2f5;
+    color: #1c1e21;
+}
+.light .container {
+    background-color: white;
+}
+.light .logout-link {
+    color: #1877f2;
+}
+
+/* --- ТЕМНАЯ ТЕМА --- */
+.dark {
+    background-color: #18191a;
+    color: #e4e6eb;
+}
+.dark .container {
+    background-color: #242526;
+}
+.dark .logout-link {
+    color: #4599ff;
+}
+
+/* Элементы формы */
+input[type="text"] {
+    width: 80%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 16px;
+    transition: border-color var(--transition-speed), background-color var(--transition-speed);
+}
+.light input[type="text"] { background-color: #fff; }
+.dark input[type="text"] { background-color: #242526; border-color: #444; }
+
+button {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color var(--transition-speed);
+}
+
+/* Кнопка входа */
+#loginForm button {
+    background-color: #1877f2;
+    color: white;
+}
+#loginForm button:hover {
+    background-color: #166fe5;
+}
+
+/* --- КНОПКИ ПЕРЕКЛЮЧЕНИЯ ТЕМЫ С ИКОНКАМИ --- */
+.theme-switch {
+    margin: 20px 0;
+}
+
+.theme-switch button {
+    padding: 8px 12px;
+    margin: 5px;
+    background-color: transparent;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: border-color var(--transition-speed), background-color var(--transition-speed), color var(--transition-speed);
+}
+
+/* Иконки (используем юникод: ☀️ и 🌙) */
+[data-theme="light"]::before { content: "☀️"; }
+[data-theme="dark"]::before { content: "🌙"; }
+
+/* Стиль для активной кнопки темы */
+.theme-switch button.active {
+    border-width: 2px;
+    font-weight: bold;
+}
+.light .theme-switch button.active {
+    border-color: #1877f2;
+    background-color: #e7f3ff;
+    color: #1877f2;
+}
+.dark .theme-switch button.active {
+    border-color: #4599ff;
+    background-color: #3a4a6a;
+    color: #4599ff;
+}
+
+/* Ссылка выхода */
+.logout-link {
+    display: inline-block;
+    margin-top: 20px;
+    text-decoration: none;
+    font-size: 14px;
+}
+.logout-link:hover {
+    text-decoration: underline;
+}
+
+/* --- ИНДИКАТОР СОХРАНЕНИЯ (появляется поверх экрана) --- */
+#theme-save-indicator {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 10px 15px;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    border-radius: 25px;
+    font-size: 14px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    z-index: 1000;
+}
+#theme-save-indicator.show {
+    opacity: 1;
+}
+
+/* --- ДОПОЛНИТЕЛЬНЫЕ СТИЛИ ДЛЯ ЛИЧНОГО КАБИНЕТА --- */
+
+/* Шапка сайта */
+.main-header {
+    width: 100%;
+    padding: 15px 0;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    transition: background-color var(--transition-speed) ease;
+}
+.light .main-header { background-color: #ffffff; border-bottom: 1px solid #e4e6eb; }
+.dark .main-header { background-color: #242526; border-bottom: 1px solid #3e4042; }
+
+.header-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 18px;
+}
+
+/* Контейнер личного кабинета */
+.dashboard-container {
+    margin-top: 30px !important;
+    text-align: left !important;
+    box-shadow: none !important;
+    background-color: transparent !important;
+    padding: 0 20px !important;
+}
+
+.welcome-card h1 {
+    margin-bottom: 5px;
+    font-size: 28px;
+}
+.welcome-card .subtitle {
+    margin-top: 0;
+    font-size: 15px;
+    opacity: 0.7;
+    margin-bottom: 30px;
+}
+
+/* Сетка карточек */
+.dashboard-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.feature-card {
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    transition: background-color var(--transition-speed) ease, transform 0.2s;
+}
+.light .feature-card { background-color: #ffffff; }
+.dark .feature-card { background-color: #242526; }
+
+.card-icon {
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+.feature-card h3 {
+    margin: 0 0 10px 0;
+    font-size: 20px;
+}
+.feature-card p {
+    font-size: 14px;
+    line-height: 1.5;
+    opacity: 0.8;
+    margin-bottom: 20px;
+}
+
+/* Кнопки */
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    font-weight: 600;
+    text-decoration: none;
+    text-align: center;
+    border-radius: 8px;
+    border: none;
+    font-size: 15px;
+    cursor: pointer;
+    transition: background-color 0.2s, opacity 0.2s;
+}
+.btn-primary {
+    background-color: #42b72a; /* Фирменный зеленый */
+    color: white;
+}
+.btn-primary:hover { background-color: #369c20; }
+
+.btn-secondary {
+    background-color: #1877f2; /* Фирменный синий */
+    color: white;
+}
+.btn-secondary:hover { background-color: #1464cd; }
+
+/* Кастомизация загрузки файлов */
+.import-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: flex-start;
+}
+.file-upload-label input[type="file"] {
+    display: none;
+}
+.file-custom-btn {
+    display: inline-block;
+    padding: 8px 16px;
+    border: 1px dashed #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: border-color var(--transition-speed);
+}
+.light .file-custom-btn { background-color: #f0f2f5; color: #1c1e21; }
+.dark .file-custom-btn { background-color: #18191a; color: #e4e6eb; border-color: #444; }
+.file-custom-btn:hover { border-color: #1877f2; }
+
+/* Статусные сообщения */
+.status-message {
+    margin-top: 10px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+/* Подвал кабинета */
+.dashboard-footer {
+    margin-top: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.btn-link {
+    text-decoration: none;
+    font-size: 14px;
+    color: #1877f2;
+}
+.dark class .btn-link { color: #4599ff; }
+.btn-link:hover { text-decoration: underline; }
+
+/* --- СТИЛИ ДЛЯ СТРАНИЦ АВТОРИЗАЦИИ И ВХОДА --- */
+
+.main-auth-container {
+    max-width: 450px !important; /* Делаем карточку входа аккуратнее и уже */
+    margin: 80px auto !important;
+    padding: 35px !important;
+}
+
+.logo-area {
+    margin-bottom: 25px;
+}
+
+.main-logo-icon {
+    font-size: 48px;
+    display: inline-block;
+    margin-bottom: 5px;
+}
+
+.logo-area h1 {
+    margin: 0;
+    font-size: 32px;
+    font-weight: 800;
+}
+
+.tagline {
+    margin: 5px 0 0 0;
+    font-size: 14px;
+    opacity: 0.6;
+}
+
+.auth-box h2 {
+    font-size: 20px;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+.auth-box form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+}
+
+.auth-box input {
+    width: 100% !important; /* Поля занимают всю ширину контейнера */
+    box-sizing: border-box;
+}
+
+.auth-box button {
+    width: 100%;
+    margin-top: 5px;
+}
+
+.btn-success {
+    background-color: #42b72a;
+    color: white;
+}
+.btn-success:hover {
+    background-color: #369c20;
+}
+
+.auth-switch-text {
+    margin-top: 20px;
+    font-size: 14px;
+    opacity: 0.8;
+}
+
+.auth-switch-text a {
+    color: #1877f2;
+    text-decoration: none;
+    font-weight: 600;
+}
+.dark .auth-switch-text a {
+    color: #4599ff;
+}
+.auth-switch-text a:hover {
+    text-decoration: underline;
+}
+
+/* Класс для плавного скрытия неактивной формы */
+.hidden {
+    display: none !important;
+}
